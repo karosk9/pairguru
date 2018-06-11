@@ -20,6 +20,7 @@ group :development do
   gem "binding_of_caller"
   gem "bullet"
   gem "letter_opener"
+  gem "pry-byebug", "~> 3.4"
   gem "pry-rails"
   gem "rails-erd"
   gem "spring"
