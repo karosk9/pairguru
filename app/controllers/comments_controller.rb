@@ -19,7 +19,7 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:title, :body, :movie_id)
+    params.require(:comment).permit(:body, :movie_id)
   end
 
   def provide_movie

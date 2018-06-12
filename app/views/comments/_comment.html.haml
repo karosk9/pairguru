@@ -1,5 +1,13 @@
-.small
-  = comment.created_at.strftime("commented by #{comment.user.email} at %I:%M%p, on %m/%d/%Y")
-%b
-= comment.body
+%p
+  .small
+    = comment.created_at.strftime(" commented by #{comment.user.email} at %I:%M%p, on %m/%d/%Y")
+  %br
+  = comment.body
+  %br
+  %br
+  - if current_user == comment.user
+    = link_to 'Delete', movie_comment_path(@movie, comment),
+                        class: 'btn btn-sm btn-default',
+                        method: :delete,
+                        data: {confirm: "Are you sure?"}
 %hr
