@@ -13,7 +13,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment = @movie.comments.find(params[:id])
     @comment.destroy
-    redirect_to movie_path(@movie)
+    redirect_to movie_path(@movie), notice: "Comment was successfully deleted."
   end
 
   private

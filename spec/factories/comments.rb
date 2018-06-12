@@ -1,7 +1,8 @@
 FactoryBot.define do
   factory :comment do
-    title "MyString"
     body "MyText"
-    movie nil
+    association :user
+    association :movie
+    created_at { Time.zone.now }
   end
 end
