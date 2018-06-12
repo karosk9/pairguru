@@ -1,0 +1,5 @@
+.small
+  = comment.created_at.strftime("commented by #{comment.user.email} at %I:%M%p, on %m/%d/%Y")
+%b
+= comment.body
+%hr

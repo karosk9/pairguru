@@ -1,0 +1,5 @@
+= form_for [@movie, @comment] do |f|
+  .form-group
+    = f.text_area :body, placeholder: "Hello #{current_user.email}! \nAdd new comment here.", class: "form-control"
+    %br
+    = f.submit 'Add comment', class: "btn btn-sm btn-default"

@@ -1,11 +1,12 @@
 class CommentsController < ApplicationController
-
-before_action :provide_movie, only: [:create, :destroy]
+  before_action :provide_movie, only: [:create, :destroy]
 
   def create
-    @comment = Comment.new(comment_params.merge(movie: @movie))
+    @comment = Comment.new(comment_params.merge(movie: @movie).merge(user: current_user))
     if @comment.save
       redirect_to movie_path(@movie)
+    else
+      render "movies/show"
     end
   end
 
@@ -14,7 +15,6 @@ before_action :provide_movie, only: [:create, :destroy]
     @comment.destroy
     redirect_to movie_path(@movie)
   end
-
 
   private
 

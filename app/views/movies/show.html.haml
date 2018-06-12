@@ -1,5 +1,14 @@
 %h1= @movie.title
 .jumbotron
   = @movie.description
-- if user_signed_in?
-  %p= link_to 'Email me details about this movie', send_info_movie_path(@movie), class: 'btn btn-sm btn-default'
+  %hr
+  -if current_user.nil?
+    To add a comment:
+    %br
+    = link_to 'sign in', new_user_session_path, class: 'btn btn-sm btn-default'
+  - if user_signed_in?
+    %p= link_to 'Email me details about this movie', send_info_movie_path(@movie), class: 'btn btn-sm btn-default'
+    = render 'comments/form'
+  %h3 Comments
+  %hr
+  = render @movie.comments.order(created_at: :desc)
