@@ -87,11 +87,10 @@ Rails.logger.info "Creating comments..."
 
 movie_ids = Movie.pluck(:id)
 user_ids = User.pluck(:id)
-20.times do
+user_ids.each do |user|
   Comment.create!(
-    title: Faker::Hipster.word,
     body: Faker::Hipster.sentence,
     movie_id: movie_ids.sample,
-    user_id: user_ids.sample
+    user_id: user
   )
 end
