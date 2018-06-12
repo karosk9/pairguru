@@ -8,7 +8,10 @@
     = link_to 'sign in', new_user_session_path, class: 'btn btn-sm btn-default'
   - if user_signed_in?
     %p= link_to 'Email me details about this movie', send_info_movie_path(@movie), class: 'btn btn-sm btn-default'
-    = render 'comments/form'
+    -if current_user.comments.where('movie_id = ?', @movie.id).present?
+      You have already commented on this movie. To add another comment, delete the previous one.
+    -else
+      = render 'comments/form'
   %h3 Comments
   %hr
   = render @movie.comments.order(created_at: :desc)

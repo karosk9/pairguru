@@ -1,8 +1,9 @@
 class CommentsController < ApplicationController
   before_action :provide_movie, only: [:create, :destroy]
+  before_action :authenticate_user!
 
   def create
-    @comment = Comment.new(comment_params.merge(movie: @movie).merge(user: current_user))
+    @comment = @movie.comments.build(comment_params.merge(user: current_user))
     if @comment.save
       redirect_to movie_path(@movie)
     else
@@ -19,7 +20,7 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:body, :movie_id)
+    params.require(:comment).permit(:body)
   end
 
   def provide_movie
