@@ -1,0 +1,19 @@
+.row
+  .col-md-8.col-md-offset-2.col-lg-8.col-lg-offset-2
+    %h1.text-center Top Ten Commenters for last 7 days
+    %table.table.table-striped
+      %thead
+        %tr
+          %th Nr
+          %th User's email
+          %th Comment counter
+      %tbody
+        - @users.each_with_index do |user, i|
+          %tr
+            %td= i + 1
+            %td
+              %h4
+                = user.email
+            %td
+              %h4
+                = user.comments.recent.count

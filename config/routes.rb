@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  get 'ranking/index'
   root "home#welcome"
   resources :genres, only: :index do
     member do

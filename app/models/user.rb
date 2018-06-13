@@ -24,4 +24,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
   has_many :comments
   validates :phone_number, format: { with: /\A[+]?\d+(?>[- .]\d+)*\z/, allow_nil: true }
+  validates :email, presence: true
+  scope :top_commenters, -> { User.joins(:comments)
+                                  .where('comments.created_at > ?', 1.week.ago)
+                                  .select('users.*, COUNT(comments.id) AS comments_counter')
+                                  .group('users.id')
+                                  .order('comments_counter desc')
+                                  .limit(10)
+                                }
 end
